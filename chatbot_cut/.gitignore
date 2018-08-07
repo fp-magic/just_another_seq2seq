@@ -5,3 +5,5 @@
 *.ckpt*
 checkpoint
 *.vec
+*.csv
+test_output.txt

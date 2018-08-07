@@ -62,6 +62,23 @@ def test(bidirectional, cell_type, depth,
         sess.run(init)
         model_pred.load(sess, save_path)
 
+        with open('test_input.txt', 'r',encoding='utf-8',newline='') as f:
+            with open('test_output.txt','w',encoding='utf-8') as g:
+                for user_text in f:
+                    user_text=user_text.rstrip()
+                    print(user_text,file=g)
+                    x_test = [jieba.lcut(user_text.lower())]
+                    bar = batch_flow([x_test], ws, 1)
+                    x, xl = next(bar)
+                    x = np.flip(x, axis=1)
+                    pred = model_pred.predict(
+                        sess,
+                        np.array(x),
+                        np.array(xl)
+                    )
+                    for p in pred:
+                        ans = ws.inverse_transform(p)
+                        print(ans,file=g)
         while True:
             user_text = input('Input Chat Sentence:')
             if user_text in ('exit', 'quit'):

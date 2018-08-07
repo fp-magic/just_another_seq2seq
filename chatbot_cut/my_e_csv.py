@@ -18,10 +18,14 @@ def main(limit=20, x_limit=3, y_limit=6):
     word_vec = pickle.load(open('word_vec.pkl', 'rb'))
 
     print('extract lines')
-    fp = open('zhihu.csv', 'r', errors='ignore')
+    fp = open('zhihu.csv', 'r', errors='ignore',encoding='utf-8')
     x_data = []
     y_data = []
+    i=0
     for line in tqdm(fp):
+        i+=1
+        if(i>10000):
+            break
         line = line.replace('\n', '')
         x, y = line.split(',')
         x = x.split(' ')
