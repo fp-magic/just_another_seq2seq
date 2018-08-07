@@ -23,9 +23,9 @@ def main(limit=20, x_limit=3, y_limit=6):
     y_data = []
     i=0
     for line in tqdm(fp):
-        i+=1
-        if(i>10000):
-            break
+        #i+=1
+        #if(i>10000):
+        #    break
         line = line.replace('\n', '')
         x, y = line.split(',')
         x = x.split(' ')
